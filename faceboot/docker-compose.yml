@@ -1,0 +1,62 @@
+version: "3.8"
+services:
+  express:
+    build: .
+    depends_on:
+      - redis
+      - postgres
+    environment:
+      - POSTGRES_DB=faceboot
+      - POSTGRES_USERNAME=testUser
+      - POSTGRES_PASSWORD=password
+      - SESSION_SECRET=forrestbear
+      # connect to the container's changing IP (suitable for dev only)
+      - HOST=host.docker.internal
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./:/usr/src/app/
+      - /usr/src/app/node_modules
+    networks:
+      - bridge-network
+
+  redis:
+    image: redis:7.0-alpine
+    volumes:
+      - ./data/redis:/data/redis
+    ports:
+      - "6379:6379"
+    networks:
+      - bridge-network
+
+  postgres:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_DB=faceboot
+      - POSTGRES_USERNAME=testUser
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      # run after db init to create some dummy data
+      # https://hub.docker.com/_/postgres initialization scripts
+      - ./database-seed.sql:/docker-entrypoint-intidb.d/database-seed.sql
+    networks:
+      - bridge-network
+  pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "eddielam@email.com"
+      PGADMIN_DEFAULT_PASSWORD: "password123"
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres
+    networks:
+      - bridge-network
+
+networks:
+  bridge-network:
+    external:
+      name: bridge-network

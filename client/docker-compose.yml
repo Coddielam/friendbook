@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  next:
+    build: .
+    ports:
+      - "3000:3000"
+    networks:
+      - bridge-network
+
+networks:
+  bridge-network:
+    external:
+      name: bridge-network

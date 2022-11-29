@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply prose prose-2xl sm:text-4xl md:text-5xl;
+  }
+  h2 {
+    @apply prose prose-2xl sm:text-2xl md:text-3xl my-4;
+  }
+  p {
+    @apply prose prose-2xl text-base md:text-base my-4;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+div[data-nextjs-scroll-focus-boundary] {
+  height: 100%;
+  width: 100%;
+}
+
+input {
+  border: 1px solid lightgray;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
