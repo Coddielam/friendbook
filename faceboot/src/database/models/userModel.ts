@@ -108,9 +108,9 @@ export class User extends Model<
     }
   }
 
-  static async findNonFriends(userId: string) {
+  static async findNonFriends(userId: string, sessionUserId: string) {
     try {
-      // find all the firends of this user
+      // find anyone who is friends with user
       const result = await this.sequelize?.models.UserFriends.findAll({
         where: { [Op.or]: [{ UserId: userId }, { friendId: userId }] },
       });

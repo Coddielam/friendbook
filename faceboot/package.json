@@ -5,14 +5,16 @@
   "main": "server.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "npm run build && node dist/server.js",
+    "start": "npm run build && node dist/src/server.js",
     "dev": "nodemon -e ts --exec \"npm run start\"",
-    "dev:docker": "nodemon -L --inspect=0.0.0.0"
+    "dev:docker": "nodemon -L --inspect=0.0.0.0",
+    "populate-fake-user": "ts-node ./scripts/populateFakeUsers.ts"
   },
   "keywords": [],
   "author": "Eddie Lam",
   "license": "UNLICENSED",
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "@types/bcrypt": "^5.0.0",
     "@types/connect-redis": "0.0.19",
     "@types/cors": "^2.8.12",
@@ -20,9 +22,13 @@
     "@types/express-session": "^1.17.5",
     "@types/multer": "^1.4.7",
     "@types/node": "^18.11.9",
+    "@types/request": "^2.48.8",
+    "axios": "^1.2.0",
     "dotenv": "^16.0.3",
+    "form-data": "^4.0.0",
     "joi": "^17.7.0",
     "nodemon": "^2.0.20",
+    "request": "^2.88.2",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.3"
   },

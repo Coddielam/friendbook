@@ -24,6 +24,7 @@ const UserProfile = () => {
   const { acceptFriendRequest } = useAcceptFriendRequest({
     userId,
     onSuccess: () => {
+      mutateGlobal(["user", userId]);
       mutateGlobal(["user", userId, "nonFriendUsers"]);
       mutateUser();
     },
@@ -40,10 +41,7 @@ const UserProfile = () => {
 
   return (
     <div className="flex gap-3 md:gap-6 items-center">
-      <Link
-        className="text-white text-2xl md:text-3xl"
-        href={`/user/${userId}`}
-      >
+      <Link className="text-white text-2xl md:text-3xl" href="/user/otherUsers">
         🔍
       </Link>
       <button
@@ -94,7 +92,7 @@ const UserProfile = () => {
           </RequestsContainer>
         )}
       </button>
-      <Link href={`/user/${userId}/profile`}>
+      <Link href="/user/me/profile">
         <div className="rounded-full h-8 w-8 md:h-12 md:w-12 overflow-hidden relative flex items-center">
           <Image
             className="rounded-full h-full w-full"

@@ -13,14 +13,18 @@ const useSendFriendRequest = ({
     error: "",
   });
 
-  const sendFriendRequest = async (id: string) => {
+  const sendFriendRequest = async (personId: string) => {
     setSendFriendRequestState({ loading: true, error: "" });
     try {
-      await serverAxiosInstance.post(`/user/${userId}/friendRequest`, {
-        friendId: id,
-      });
+      const res = await serverAxiosInstance.post(
+        `/user/${userId}/friendRequest`,
+        {
+          friendId: personId,
+        }
+      );
       onSuccess();
       setSendFriendRequestState({ loading: false, error: "" });
+      return res;
     } catch (error: any) {
       setSendFriendRequestState({ loading: false, error: error.message });
     }

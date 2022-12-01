@@ -44,11 +44,11 @@ export default function useUser(
     if (redirectTo && data && !isValidating) {
       switch (redirectTo) {
         case "profile_page":
-          router.push(`/user/${data.userId}/profile`);
+          router.push(`/user/me/profile`);
           break;
         case "social_feed_page":
         default:
-          router.push(`/user/${data.userId}`);
+          router.push(`/user/otherUsers`);
           break;
       }
     }

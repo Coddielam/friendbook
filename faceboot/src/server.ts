@@ -7,6 +7,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { RedisSessionStore } from "./features/user/services/session/connectSession";
 import { hostname } from "os";
+
+import { insertFakeUserIntoDB } from "../scripts/populateFakeUsers";
+
 dotenv.config();
 
 const app: Express = express();
@@ -16,8 +19,17 @@ const sequalize = database;
 (async () => {
   try {
     // enfore synchronization with the models define in app
-    const result = await sequalize.sync({ alter: true });
-    console.log("db connected and sync");
+    const result = await sequalize.sync(
+      process.env.POPULATE_FAKE_USER ? { force: true } : { alter: true }
+    );
+    console.log("🌟 db connected and sync");
+    console.log(process.env.POPULATE_FAKE_USER);
+    console.log("process.env", process.env);
+    if (process.env.POPULATE_FAKE_USER) {
+      console.log("insert fake data");
+      await insertFakeUserIntoDB();
+      console.log("Insertion of fake users completed");
+    }
   } catch (error) {
     console.error("unable to connect to db:", error);
   }

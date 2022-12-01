@@ -12,6 +12,7 @@ services:
       - SESSION_SECRET=forrestbear
       # connect to the container's changing IP (suitable for dev only)
       - HOST=host.docker.internal
+      - POPULATE_FAKE_USER=true
     ports:
       - "4000:4000"
     volumes:
@@ -34,16 +35,17 @@ services:
     restart: always
     environment:
       - POSTGRES_DB=faceboot
-      - POSTGRES_USERNAME=testUser
+      - POSTGRES_USER=testUser
       - POSTGRES_PASSWORD=password
     ports:
       - "5432:5432"
-    volumes:
-      # run after db init to create some dummy data
-      # https://hub.docker.com/_/postgres initialization scripts
-      - ./database-seed.sql:/docker-entrypoint-intidb.d/database-seed.sql
+    # volumes:
+    # run after db init to create some dummy data
+    # https://hub.docker.com/_/postgres initialization scripts
+    # - ./database-seed.sql:/docker-entrypoint-intidb.d/database-seed.sql
     networks:
       - bridge-network
+
   pgadmin-compose:
     image: dpage/pgadmin4
     environment:

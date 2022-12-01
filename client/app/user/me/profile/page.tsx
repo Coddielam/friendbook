@@ -1,12 +1,18 @@
 "use client";
 
-import { FormEventHandler, PropsWithChildren, useState } from "react";
+import {
+  FormEventHandler,
+  PropsWithChildren,
+  useEffect,
+  useState,
+} from "react";
 import { TUser } from "@/types/api/user";
 import serverAxiosInstance from "@/utils/axios/serverInstance";
 import useSWR from "swr";
 import useUser from "@/utils/auth/useUser";
 import ProfileContainer from "../../ProfileContainer";
 import validateUpdateUserForm from "@/utils/validations/validateUpdateUser";
+import useGetUser from "@/hooks/useGetUser";
 
 function ProfileSkeleton() {
   return (
@@ -125,7 +131,7 @@ function UpdateUserForm({
           New profile picture:
           <br />
           <input
-            className="inline-block max-w-full"
+            className="inline-block w-full"
             type="file"
             name="profile_pic"
             id="profile_pic"
@@ -182,40 +188,19 @@ function UpdateUserForm({
 function UserProfile() {
   const { userId, mutate: mutateGlobalUser } = useUser();
   const [showUpdateUserForm, setShowUpadteUserForm] = useState(false);
-
-  const {
-    data: user,
-    mutate: mutateUser,
-    error,
-    isValidating: userLoading,
-  } = useSWR<TUser | null>(
-    userId ? ["user", userId] : null,
-    async () => {
-      if (!userId) return null;
-      try {
-        const { data } = await serverAxiosInstance.get(`/user/${userId}`);
-        return data.user;
-      } catch (error) {
-        console.error(error);
-        throw error;
-      }
-    },
-    {
-      revalidateOnFocus: false,
-    }
-  );
+  const { user, mutateUser, error, userLoading } = useGetUser(userId, true);
 
   return (
     <div className="pt-10 w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
       {/* loading skeleton */}
       {userLoading && (
-        <div className="h-fit md:fixed">
+        <div className="h-fit md:sticky md:top-[132px]">
           <ProfileSkeleton />
         </div>
       )}
       {/* user profile */}
       {!userLoading && user && (
-        <div className="h-fit">
+        <div className="h-fit md:sticky md:top-[132px]">
           <ProfileContainer
             user={user}
             renderChildren={() => {
@@ -263,7 +248,11 @@ function UserProfile() {
             user.friends.map((friend) => {
               return (
                 <div className="pt-3" key={friend.id}>
-                  <ProfileContainer user={friend} smallPic />
+                  <ProfileContainer
+                    user={friend}
+                    linkProfilePic={true}
+                    smallPic
+                  />
                 </div>
               );
             })}

@@ -51,12 +51,7 @@ const NonUserFriends = () => {
   const [addFriendBtnId, setAddFriendBtnId] = useState("");
 
   if (nonFriends && !nonFriends.length) {
-    return (
-      <h2>
-        There is no one you don't already know on this network. Perhaps it's a
-        sign for you to move on to a larger social network, like facebook.
-      </h2>
-    );
+    return <h2>There are no new friends to add ✨</h2>;
   }
 
   return (
@@ -67,6 +62,7 @@ const NonUserFriends = () => {
           return (
             <ProfileContainer
               key={user.id}
+              linkProfilePic={true}
               user={user}
               renderChildren={(user) => {
                 if (!user) return null;

@@ -40,13 +40,21 @@ Considering there are no complex form validation logic in this app, form validat
 
 You will need to have Docker installed on your machine.
 
+<hr>
+
+#### Running the app
+
+To run the client and the backend, you will need to have node 16>, redis, pgadmin, installed on your machine. To save your hassel of installing all the depenedies to run this app. You can just run the whole application in a few commands with docker. Following list the instructions:
+
 1. Set up a network for the backend and frontend of this app to communicate on from:
 
 ```
 docker network create -d bridge my-bridge-network
 ```
 
-2. Start the backend and frontend with docker
+2. To by default, fake users will be created for you. If you would like to turn that off, change the environment variable in `docker-compose.yml` in the `faceboot` folder.
+
+3. Start the backend and frontend with docker
 
 ```
 docker-compose -f ./faceboot/docker-compose.yml up -d --build && docker-compose -f ./client/docker-compose.yml up -d --build

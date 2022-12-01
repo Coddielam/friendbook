@@ -193,7 +193,10 @@ const getUsers: RequestHandler = async (request, response) => {
 const getNonFriends: RequestHandler = async (request, response) => {
   const { id } = request.params;
   try {
-    const result = await models.User.findNonFriends(id);
+    const result = await models.User.findNonFriends(
+      id,
+      request.session.userId!
+    );
     response.status(200).json(result);
   } catch (error: any) {
     response.status(error.meta.code || 500).json({
@@ -272,8 +275,15 @@ const getUser: RequestHandler = async (request, response) => {
 
   try {
     const user = await models.User.findFriends(id);
+    const friendRequests = await models.User.getFriendRequests(id);
+    const requestedAddFriend = friendRequests.some(
+      (friendRequest) => friendRequest.id === request.session.userId
+    );
+
     if (user) {
-      response.status(200).json({ user });
+      response
+        .status(200)
+        .json({ user: { ...user.dataValues, requestedAddFriend } });
     } else {
       throw new CustomError("User not found", { code: 400 });
     }
