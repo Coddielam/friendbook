@@ -77,7 +77,7 @@ const UserProfile = () => {
                         className="col-span-2"
                       />
                     </div>
-                    <p className="whitespace-nowrap col-span-6 text-base">
+                    <p className="col-span-6 text-base text-left">
                       {requestUser.name} sent you a friend request!
                     </p>
                     <button

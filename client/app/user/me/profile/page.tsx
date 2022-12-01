@@ -133,6 +133,7 @@ function UpdateUserForm({
           <input
             className="inline-block w-full"
             type="file"
+            accept="image/*"
             name="profile_pic"
             id="profile_pic"
             placeholder="A profile picture"

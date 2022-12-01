@@ -80,14 +80,7 @@ export default function () {
   return (
     <SWRConfig
       value={{
-        revalidateOnFocus: false,
-        revalidateOnMount: false,
-        revalidateOnReconnect: false,
-        refreshWhenOffline: false,
-        refreshWhenHidden: false,
-        refreshInterval: 0,
         onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
-          if (error.status === 404) return;
 
           if (retryCount >= 3) return;
 

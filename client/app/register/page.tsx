@@ -48,7 +48,7 @@ export default function HomePage() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-4 w-fit justify-center items-center h-full md:max-w-5xl mx-auto px-4">
       <div className="h-fit p-5 self-end md:self-auto mr-auto">
-        <h1 className="text-blue">faceboot</h1>
+        <h1 className="text-blue">friendbook</h1>
         <p>Faceboot helps you create genuine friendships.</p>
       </div>
 
@@ -70,6 +70,7 @@ export default function HomePage() {
             <input
               className="inline-block max-w-full"
               type="file"
+              accept="image/*"
               name="profile_pic"
               id="profile_pic"
               placeholder="A profile picture"
