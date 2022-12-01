@@ -1,37 +1,5 @@
 ## The friendbook app:
 
-### Backend:
-
-The backend is written with Node js + Typescript to add types -- to allow for easier maintainance and development.
-
-It has Express server as server; Express is the most popular server framework in Node js. Its usage of middlewares makes it easy to use and customize.
-
-The express server serves a user route that allows to simple creation, logging in a user, getting a user's friends, update of user's profile, making friend requests, accepting friend requests, and logging out of user.
-
-The server uses the Postgres with Sequelize ORM. The Sequelize makes it easy to define database models that provide type support in the editor environment. It also makes it easy to encapsulate complex queries.
-
-<hr>
-
-### Frontend
-
-#### Framework
-
-Considering a social media site might want to be searchable from search engines <b>some day</b>, the frontend is built with Next 13 with the app directory. Next 13 introduces a new way to implement React 18's server components. Even though right now users need to login to see the users on the network.
-
-#### UI
-
-On top, tailwind is used to add styling to the app. Tailwind makes it easy to configure overall app design -- theme colors, spacing, typography etc.. It also reduces the amount of css you need to write which makes development easier and less, if not none stylesheet to maintain.
-
-#### Data fetching
-
-useSWR is used to perform 90% of the data fetching. useSWR saves you from having to using multiple hooks `useEffect`, `useState`, to handling data fetching and handling the result and error. More importantly, useSWR helps implement client-side caching -- it serves data fetching result from previously stored cache, while revalidating it in the background -- which in turns provides a better user experience.
-
-#### Form validation
-
-Considering there are no complex form validation logic in this app, form validation is handled by util functions written in simple JavaScript to check if required fields are submitted. For more complex form validation, `react-hook-form` is a good package to use. It uses `ref` to validate input, which prevent unnecessary re-renders.
-
-<hr>
-
 ### Running the project
 
 #### Pre-requisites:
@@ -57,3 +25,20 @@ docker network create -d bridge my-bridge-network
 ```
 docker-compose -f ./faceboot/docker-compose.yml up -d --build && docker-compose -f ./client/docker-compose.yml up -d --build
 ```
+### Using the app:
+
+1. **Visit the app on browser:** To access the app, go to `localhost:3000` on your browser. 
+
+2. **Registering an account** You will be greeted with a login page. Since you don't have an account, you will have to click on **Create an account** to create an account first. Once registration is complete, you will be redirected to the home page 
+
+3. **Add a friend:** You can send friend request to the one you want to befriend with. 
+
+4. **Approve the request:** Say you have sent request to John Doe with email **john_doe@email.com**. To approve the request, log out by clicking on 🚪. And login with **john_doe@email.com** with password `12341234`. (All fake users on this network uses the password `12341234`). <br>* *Dont worry you can log into their account, they don't mind. They are fake.* *
+
+5. **Accept request:** Once you have logged in to that account, you will see a notification on 🌍. Click it and approve the friend request. 
+
+6. **View profile:** Go to your profile by clicking your icon on the top right. You will see your friends on the right panel. You can also update your password here. 
+
+7. **Viewing other user's profile:** Go to home page, click on the profile picture of any user, you will see their profile and their friends. 
+
+

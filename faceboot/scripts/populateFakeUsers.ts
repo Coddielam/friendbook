@@ -1,4 +1,3 @@
-import database from "../src/database";
 import FormData from "form-data";
 import { faker } from "@faker-js/faker";
 import request from "request";
