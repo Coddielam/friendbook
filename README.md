@@ -1,5 +1,8 @@
 ## The friendbook app:
 
+author: Eddie Lam 
+email: edlam711@email.com
+
 ### Running the project
 
 #### Pre-requisites:
