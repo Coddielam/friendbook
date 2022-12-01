@@ -1,7 +1,5 @@
 ## The friendbook app:
 
-<hr>
-
 ### Backend:
 
 The backend is written with Node js + Typescript to add types -- to allow for easier maintainance and development.
@@ -44,7 +42,7 @@ You will need to have Docker installed on your machine.
 
 #### Running the app
 
-To run the client and the backend, you will need to have node 16>, redis, pgadmin, installed on your machine. To save your hassel of installing all the depenedies to run this app. You can just run the whole application in a few commands with docker. Following list the instructions:
+To run the client and the backend, you will need to have node 16>, redis, pgadmin, installed on your machine. To save you the hassel of installing all the depenedies to run this app. You can just run the whole application in a few commands with docker. Following list the instructions:
 
 1. Set up a network for the backend and frontend of this app to communicate on from:
 
