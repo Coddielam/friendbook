@@ -38,6 +38,7 @@ export default function ProfileContainer({
                 className="rounded-full shadow-sm shadow-slate-400 h-full w-full"
                 fill
                 style={{ objectFit: "cover" }}
+                placeholder="blur"
                 src={`${process.env.NEXT_PUBLIC_BACKEND_URL}/${user.profile_pic}`}
                 alt={user.name}
               />

@@ -15,6 +15,7 @@ serverAxiosInstance.interceptors.response.use(
       case 401:
         throw new Error("Please authenticate");
       case 400:
+        console.error(error)
         throw new Error(
           "Please make sure you're submiting the right information"
         );

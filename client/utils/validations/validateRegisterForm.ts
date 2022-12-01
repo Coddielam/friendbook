@@ -19,7 +19,6 @@ const validateRegisterForm = (formData: FormData): string => {
     }
   }
 
-  console.log("dataObj:", dataObj);
   // check include all required fields
   const missingFields = requiredFields.filter((field) => {
     return !Object.keys(dataObj).includes(field);
@@ -31,6 +30,11 @@ const validateRegisterForm = (formData: FormData): string => {
           field.charAt(0).toUpperCase() + field.replace("_", " ").slice(1)
       )
       .join(", ")} are required`;
+  }
+
+  // check if company name is > 3 letters or longer
+  if (dataObj.company.length < 3) {
+    return "Company name has to be longer than 3 letters"
   }
 
   // check if password and repeat password matches

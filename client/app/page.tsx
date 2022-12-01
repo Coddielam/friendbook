@@ -80,6 +80,7 @@ export default function () {
   return (
     <SWRConfig
       value={{
+        refreshInterval: 0,
         onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
 
           if (retryCount >= 3) return;
